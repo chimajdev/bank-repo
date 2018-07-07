@@ -1,0 +1,180 @@
+{% extends "customers/base.html" %}
+
+ {% block title %} 
+    Dashboard
+ {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-warning text-center">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Customers</p>
+                            2534
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="ti-reload"></i> Updated now
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-success text-center">
+                            <i class="fa fa-money"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Balance</p>
+                            $1,345,000
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="ti-calendar"></i> Last day
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-danger text-center">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Visitors</p>
+                            23
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fa fa-reload"></i> In the last hour
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-info text-center">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Followers</p>
+                            +45
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="ti-reload"></i> Updated now
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Users Behavior</h4>
+                <p class="category">24 Hours performance</p>
+            </div>
+            <div class="content">
+
+                <div id="chartHours" class="ct-chart"></div>
+
+
+                <div class="footer">
+                    <div class="chart-legend">
+                        <i class="fa fa-circle text-info"></i> Open
+                        <i class="fa fa-circle text-danger"></i> Click
+                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                    </div>
+                    <hr>
+                    <div class="stats">
+                        <i class="ti-reload"></i> Updated 3 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+
+        var dataSales = {
+            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+            series: [
+                [287, 385, 490, 562, 594, 626, 698, 895, 952],
+                [67, 152, 193, 240, 387, 435, 535, 642, 744],
+                [23, 113, 67, 108, 190, 239, 307, 410, 410]
+            ]
+        };
+    
+        var optionsSales = {
+            lineSmooth: false,
+            low: 0,
+            high: 1000,
+            showArea: true,
+            height: "245px",
+            axisX: {
+                showGrid: false,
+            },
+            lineSmooth: Chartist.Interpolation.simple({
+                divisor: 3
+            }),
+            showLine: true,
+            showPoint: false,
+        };
+    
+        var responsiveSales = [
+            ['screen and (max-width: 640px)', {
+                axisX: {
+                    labelInterpolationFnc: function (value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+    
+        Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+</script>
+{% endblock %}
