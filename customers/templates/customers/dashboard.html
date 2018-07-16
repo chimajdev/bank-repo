@@ -43,7 +43,11 @@
                     <div class="col-xs-7">
                         <div class="numbers">
                             <p>Balance</p>
-                            $1,345,000
+
+                            {% if account %}
+                              ${{account.account_balance}}
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>

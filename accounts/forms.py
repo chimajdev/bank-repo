@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
 from django.views.generic import FormView
-from .models import User
+from .models import User, Profile
 
 
 class SignUpForm(forms.ModelForm):
@@ -90,3 +90,17 @@ class UserAdminChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class ProfileForm(forms.ModelForm):
+    first_name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder':'First Name','class':'form-control border-input'}))
+    last_name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder':'Last Name','class':'form-control border-input'}))
+    # bio = forms.CharField(label='', widget=forms.Textarea(attrs={'rows':'5','class':'form-control border-input','placeholder': 'Your Biography'}))
+    address = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Address','class':'form-control border-input'}))
+    city = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'City','class':'form-control border-input'}))
+    country = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Country','class':'form-control border-input'}))
+    zip_code = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Zip Code','class':'form-control border-input'}))
+
+    class Meta:
+        model = Profile
+        fields = ('first_name', 'last_name','address', 'city','country','zip_code',)

@@ -30,11 +30,10 @@
 				</div>
 				<div class="col-md-7 w3l_contact_form">
 					<h4>Contact Form</h4> 
-					<form action="#" method="post">
-						<input type="text" name="Name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-						<input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-						<input type="text" name="Phone" value="Phone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone';}" required="">
-						<textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+					<form method="post">{% csrf_token %}
+						<input type="text" name="name" placeholder="Name">
+						<input type="email" name="email" placeholder="Email">
+						<textarea name="message" placeholder="Message"></textarea>
 						<input type="submit" value="Submit">
 					</form>
 				</div>

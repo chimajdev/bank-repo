@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -110,10 +111,10 @@ class User(AbstractBaseUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.deletion.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.deletion.CASCADE, blank=True)
     first_name = models.CharField(blank=True, max_length=30)
     last_name = models.CharField(blank=True, max_length=30)
-    bio = models.TextField(blank=True, max_length=500)
+    # bio = models.TextField(blank=True, max_length=500)
     address = models.CharField(blank=True, max_length=30)
     city = models.CharField(blank=True, max_length=50)
     country = models.CharField(blank=True, max_length=50)
@@ -124,7 +125,11 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
+def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+    instance.profile.save()
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, **kwargs):
     instance.profile.save()

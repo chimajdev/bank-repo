@@ -1,12 +1,12 @@
 {% extends "customers/base.html" %}
 
- {% block title %} 
+ {% block title %}
  Send Money
  {% endblock %}
 
 {% block content %}
 <div class="row">
-    
+
     <form method="POST">
         {% csrf_token %}
 
@@ -19,6 +19,12 @@
         <div class="form-group">
 
             {{ form.to_account }}
+
+        </div>
+
+        <div class="form-group">
+
+            {{ form.amount }}
 
         </div>
 
